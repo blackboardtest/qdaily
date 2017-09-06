@@ -1,0 +1,20 @@
+{
+  "version": "0.0.1",
+  "name": "好奇心日报",
+  "description": "好奇心日报",
+  "keywords": [
+    "科技"
+  ],
+  "interval": 10,
+  "author": {
+    "name": "vimrus",
+    "email": "vimrus.com@gmail.com",
+    "url": "https://github.com/vimrus"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vimrus/qdaily"
+  },
+  "bugs": "https://github.com/vimrus/qdaily/issues",
+  "main": "index.js"
+}
