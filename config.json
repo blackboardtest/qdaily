@@ -11,6 +11,7 @@
     "email": "vimrus.com@gmail.com",
     "url": "https://github.com/vimrus"
   },
+  "style": "title-image",
   "repository": {
     "type": "git",
     "url": "https://github.com/vimrus/qdaily"

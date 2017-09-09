@@ -18,13 +18,15 @@ hubble.getXML('http://www.qdaily.com/feed.xml', function (error, response, $) {
 
 			var content = html.html().trim()
 			var summary = html.text().trim().substring(0, 50);
+			var image   = html.find('img').eq(0).attr('src');
 
 			var article = {
 				key: key,
 				title: title,
 				content: content,
 				summary: summary,
-				url: url
+				url: url,
+				image: image
 			};
 			articles.append(article);
 		});
