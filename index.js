@@ -10,10 +10,12 @@ hubble.getXML('http://www.qdaily.com/feed.xml', function (error, response, $) {
 				return;
 			}
 
-			var title   = dom.find('title').text().trim();
-			var body = dom.find('description');
-			body.find('style').remove();
-			var content = body.html()
+			var title = dom.find('title').text().trim();
+			var body  = dom.find('description');
+			var $ = cheerio.load(body);
+			$('style').remove();
+
+			var content = $.html()
 			var summary = content.replace(/<\/?[^>]*>/g,'').trim().substring(0, 50);
 
 			var article = {
