@@ -13,9 +13,10 @@ hubble.getXML('http://www.qdaily.com/feed.xml', function (error, response, $) {
 			var title = dom.find('title').text().trim();
 			var body  = dom.find('description');
 			var $ = cheerio.load(body);
-			$('style').remove();
+			var html = $('html').remove();
+			html.find('style').remove();
 
-			var content = $.html()
+			var content = html.html()
 			var summary = content.replace(/<\/?[^>]*>/g,'').trim().substring(0, 50);
 
 			var article = {
