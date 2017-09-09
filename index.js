@@ -1,7 +1,7 @@
 hubble.getXML('http://www.qdaily.com/feed.xml', function (error, response, $) {
 	$('item').each(function (index, value) {
 
-		var url = $(this).find('link').text();
+		var url = $(this).find('link').text().trim();
 		var key = url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('.html'));
 		var dom = $(this);
 
