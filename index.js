@@ -11,7 +11,7 @@ hubble.getXML('http://www.qdaily.com/feed.xml', function (error, response, $) {
 			}
 
 			var title = dom.find('title').text().trim();
-			var body  = dom.find('description');
+			var body  = dom.find('description').text();
 			var $ = cheerio.load('<html>' + body + '</html>');
 			var html = $('html').eq(0);
 			html.find('style').remove();
