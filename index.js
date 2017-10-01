@@ -17,9 +17,10 @@ hubble.getJSON('http://www.qdaily.com/homes/articlemore/' + timestamp + '.json',
 		      	summary: feed.post.description,
 		      	content: content,
 		      	url: url,
-		      	image: feed.image
+		      	image: feed.image,
+		      	channel: 0
 		      };
-		      articles.append(0, article);
+		      articles.append(article);
 			});
 		});
 	});
@@ -42,9 +43,10 @@ channels.forEach( function(tag) {
 			      	summary: feed.post.description,
 			      	content: content,
 			      	url: url,
-			      	image: feed.image
+			      	image: feed.image,
+			      	channel: tag
 			      };
-			      articles.append(tag, article);
+			      articles.append(article);
 				});
 			});
 		});
