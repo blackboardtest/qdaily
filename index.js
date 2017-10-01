@@ -1,7 +1,7 @@
 var channels = [1068, 29, 18, 4, 3, 54];
 var timestamp = Date.parse(new Date()) / 1000;
 
-hubble.getJSON('http://www.qdaily.com/homes/articlemore/' + timestamp + '.json', function (error, response, $) {
+hubble.getJSON('http://www.qdaily.com/homes/articlemore/' + timestamp + '.json', function (error, response, data) {
 	data.data.feeds.forEach(function (feed) {
 		articles.get('id', feed.post.id, function(article) {
 			if (article) {
@@ -27,7 +27,7 @@ hubble.getJSON('http://www.qdaily.com/homes/articlemore/' + timestamp + '.json',
 });
 
 channels.forEach( function(tag) {
-	hubble.getJSON("http://www.qdaily.com/tags/tagmore/" + tag + "/" + timestamp + '.json', function (error, response, $) {
+	hubble.getJSON("http://www.qdaily.com/tags/tagmore/" + tag + "/" + timestamp + '.json', function (error, response, data) {
 		data.data.feeds.forEach(function (feed) {
 			articles.get('id', feed.post.id, function(article) {
 				if (article) {
