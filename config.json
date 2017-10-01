@@ -11,6 +11,15 @@
     "email": "vimrus.com@gmail.com",
     "url": "https://github.com/vimrus"
   },
+  "channels": [
+    { "key": 0, "name": "首页" },
+    { "key": 1068, "name": "长文章" },
+    { "key": 29, "name": "TOP 15" },
+    { "key": 18, "name": "商业" },
+    { "key": 4, "name": "智能" },
+    { "key": 3, "name": "娱乐" },
+    { "key": 54, "name": "游戏" }
+  ],
   "style": "title-image",
   "repository": {
     "type": "git",

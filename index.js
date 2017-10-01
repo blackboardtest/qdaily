@@ -1,34 +1,52 @@
-hubble.getXML('http://www.qdaily.com/feed.xml', function (error, response, $) {
-	$('item').each(function (index, value) {
+var channels = [1068, 29, 18, 4, 3, 54];
+var timestamp = Date.parse(new Date()) / 1000;
 
-		var url = $(this).find('link').text().trim();
-		var id = url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('.html'));
-		var dom = $(this);
-
-		articles.get('id', id, function (article) {
+hubble.getJSON('http://www.qdaily.com/homes/articlemore/' + timestamp + '.json', function (error, response, $) {
+	data.data.feeds.forEach(function (feed) {
+		articles.get('id', feed.post.id, function(article) {
 			if (article) {
 				return;
 			}
 
-			var title = dom.find('title').text().trim();
-			var body  = dom.find('description').text();
-			var $ = cheerio.load('<html>' + body + '</html>');
-			var html = $('html').eq(0);
-			html.find('style').remove();
+			var url = "http://www.qdaily.com/articles/" + feed.post.id + ".html"
+			hubble.getHtml(url, function (error, response, $) {
+					var content = $('.article-detail-bd .detail').html();
+		      var article = {
+		      	id: feed.post.id,
+		      	title: feed.post.title,
+		      	summary: feed.post.description,
+		      	content: content,
+		      	url: url,
+		      	image: feed.image
+		      };
+		      articles.append(0, article);
+			});
+		});
+	});
+});
 
-			var content = html.html().trim()
-			var summary = html.text().trim().substring(0, 50);
-			var image   = html.find('img').eq(0).attr('src');
-
-			var article = {
-				id: id,
-				title: title,
-				content: content,
-				summary: summary,
-				url: url,
-				image: image
-			};
-			articles.append(article);
+channels.forEach( function(tag) {
+	hubble.getJSON("http://www.qdaily.com/tags/tagmore/" + tag + "/" + timestamp + '.json', function (error, response, $) {
+		data.data.feeds.forEach(function (feed) {
+			articles.get('id', feed.post.id, function(article) {
+				if (article) {
+					return;
+				}
+	
+				var url = "http://www.qdaily.com/articles/" + feed.post.id + ".html"
+				hubble.getHtml('http://www.yinwang.org', function (error, response, $) {
+						var content = $('.article-detail-bd .detail').html();
+			      var article = {
+			      	id: feed.post.id,
+			      	title: feed.post.title,
+			      	summary: feed.post.description,
+			      	content: content,
+			      	url: url,
+			      	image: feed.image
+			      };
+			      articles.append(tag, article);
+				});
+			});
 		});
 	});
 });
