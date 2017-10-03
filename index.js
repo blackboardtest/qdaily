@@ -10,7 +10,6 @@ hubble.getJSON('http://www.qdaily.com/homes/articlemore/' + timestamp + '.json',
 
 			var url = "http://www.qdaily.com/articles/" + feed.post.id + ".html";
 			hubble.getHtml(url, function (error, response, $) {
-
 				// data-src -> src
 				$('[data-src]').each(function(){
 					var $img = $(this);
@@ -42,7 +41,13 @@ channels.forEach( function(tag) {
 				}
 	
 				var url = "http://www.qdaily.com/articles/" + feed.post.id + ".html"
-				hubble.getHtml(url, function (error, response, $) {
+					hubble.getHtml(url, function (error, response, $) {
+						// data-src -> src
+						$('[data-src]').each(function(){
+							var $img = $(this);
+							$img.attr('src', $img.attr('data-src'));
+						});
+
 						var content = $('.article-detail-bd .detail').html();
 			      var article = {
 			      	id: feed.post.id,
