@@ -8,7 +8,7 @@ hubble.getJSON('http://www.qdaily.com/homes/articlemore/' + timestamp + '.json',
 				return;
 			}
 
-			var url = "http://www.qdaily.com/articles/" + feed.post.id + ".html";
+			var url = "http://m.qdaily.com/mobile/articles/" + feed.post.id + ".html";
 			hubble.getHtml(url, function (error, response, $) {
 				// data-src -> src
 				$('[data-src]').each(function(){
