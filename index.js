@@ -9,19 +9,29 @@ hubble.getJSON('http://www.qdaily.com/homes/articlemore/' + timestamp + '.json',
 			}
 
 			var url = "http://www.qdaily.com/articles/" + feed.post.id + ".html"
-			hubble.getHtml(url, function (error, response, $) {
+				hubble.getHtml(url, function (error, response, $) {
+
+					// data-src -> src
+					$('[data-src]').each(function(){
+						var $img = $(this);
+						$img.attr('src', $img.attr('data-src'));
+						$img.load(function(){
+							$img.removeAttr('data-src');
+						})
+					});
+
 					var content = $('.article-detail-bd .detail').html();
-		      var article = {
-		      	id: feed.post.id,
-		      	title: feed.post.title,
-		      	summary: feed.post.description,
-		      	content: content,
-		      	url: url,
-		      	image: feed.image,
-		      	channel: 0
-		      };
-		      articles.append(article);
-			});
+					var article = {
+						id: feed.post.id,
+						title: feed.post.title,
+						summary: feed.post.description,
+						content: content,
+						url: url,
+						image: feed.image,
+						channel: 0
+					};
+					articles.append(article);
+				});
 		});
 	});
 });
