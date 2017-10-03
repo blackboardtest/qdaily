@@ -15,9 +15,6 @@ hubble.getJSON('http://www.qdaily.com/homes/articlemore/' + timestamp + '.json',
 					$('[data-src]').each(function(){
 						var $img = $(this);
 						$img.attr('src', $img.attr('data-src'));
-						$img.load(function(){
-							$img.removeAttr('data-src');
-						})
 					});
 
 					var content = $('.article-detail-bd .detail').html();
